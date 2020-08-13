@@ -1,19 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <getopt.h>
 
 #define APP_NAME     "pause"
 #define APP_VERSION  "1.0.0"
-
-/*
-int getopt(int argc, char * const argv[],
-           const char *optstring);
-
-extern char *optarg;
-extern int optind, opterr, optopt;
-*/
-
 
 int main(int argc, char *argv[])
 {
