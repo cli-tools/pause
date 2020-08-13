@@ -1,12 +1,22 @@
-build: pause pause.1
+SHELL = /bin/sh
+ALL = pause pause.1
+DESTDIR = /usr/local
+INSTALL = install
+HELP2MAN = help2man -N
+
+build: $(ALL)
 	$(NOOP)
 
 clean:
-	$(RM) pause pause.man
+	$(RM) $(ALL)
 
-install:
-	install pause.1 /usr/local/share/man/man1/
-	install --strip pause /usr/local/bin/
+install: $(ALL)
+	$(INSTALL) pause $(DESTDIR)/bin
+	$(INSTALL) pause.1 $(DESTDIR)/share/man/man1
 
-pause.1: pause
-	help2man -N --help-option="-h" --version-option="-v" -o $@ ./pause
+install-strip: $(ALL)
+	$(INSTALL) --strip pause $(DESTDIR)/bin
+	$(INSTALL) pause.1.gz $(DESTDIR)/share/man/man1
+
+%.1 : %
+	$(HELP2MAN) --help-option="-h" --version-option="-v" -o $@ ./$^
